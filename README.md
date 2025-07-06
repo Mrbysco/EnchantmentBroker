@@ -5,6 +5,7 @@
 
 ## About ##
 Enchantment Broker adds a new mob called **The Refundler**, who resembles a Wandering Trader. Right-clicking the Broker with an enchanted item will strip its enchantments. The Broker will then offer those enchantments back to you on books in exchange for emeralds. This gives players the ability to strip enchants onto books.
+Dropping an anvil onto a Wandering Trader will transform the wandering trader into the Broker.
 
 ## License ##
 * Enchantment Broker is licensed under the MIT License
