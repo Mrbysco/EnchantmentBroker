@@ -1,0 +1,53 @@
+{
+  "broker.ambient": {
+    "sounds": [
+      "mob/wandering_trader/idle1",
+      "mob/wandering_trader/idle2",
+      "mob/wandering_trader/idle3",
+      "mob/wandering_trader/idle4",
+      "mob/wandering_trader/idle5"
+    ],
+    "subtitle": "enchantmentbroker.subtitle.broker.ambient"
+  },
+  "broker.death": {
+    "sounds": [
+      "mob/wandering_trader/death"
+    ],
+    "subtitle": "enchantmentbroker.subtitle.broker.death"
+  },
+  "broker.hurt": {
+    "sounds": [
+      "mob/vindication_illager/hurt1",
+      "mob/vindication_illager/hurt2",
+      "mob/vindication_illager/hurt3"
+    ],
+    "subtitle": "enchantmentbroker.subtitle.broker.hurt"
+  },
+  "broker.no": {
+    "sounds": [
+      "mob/wandering_trader/no1",
+      "mob/wandering_trader/no2",
+      "mob/wandering_trader/no3",
+      "mob/wandering_trader/no4",
+      "mob/wandering_trader/no5"
+    ],
+    "subtitle": "enchantmentbroker.subtitle.broker.no"
+  },
+  "broker.trade": {
+    "sounds": [
+      "mob/wandering_trader/haggle1",
+      "mob/wandering_trader/haggle2",
+      "mob/wandering_trader/haggle3"
+    ],
+    "subtitle": "enchantmentbroker.subtitle.broker.trade"
+  },
+  "broker.yes": {
+    "sounds": [
+      "mob/wandering_trader/yes1",
+      "mob/wandering_trader/yes2",
+      "mob/wandering_trader/yes3",
+      "mob/wandering_trader/yes4"
+    ],
+    "subtitle": "enchantmentbroker.subtitle.broker.yes"
+  }
+}

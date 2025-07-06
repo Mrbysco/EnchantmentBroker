@@ -1,0 +1,21 @@
+{
+  "command.enchantmentbroker.add.message": "Added §e%s§r level §e%s§r to §e%s§r's stored enchantments",
+  "command.enchantmentbroker.clear.empty": "No stored enchantments found for §e%s§r to clear",
+  "command.enchantmentbroker.clear.message": "Cleared all stored enchantments for §e%s§r",
+  "command.enchantmentbroker.list.empty": "No enchantments found for §e%s§r",
+  "command.enchantmentbroker.list.message": "List of enchantments for §e%s§r:",
+  "command.enchantmentbroker.list.message.enchant": "Enchantment: §e%s§r, Level §e%s§r",
+  "command.enchantmentbroker.remove.failed": "Failed to remove §e%s§r level §e%s§r from §e%s§r's stored enchantments, it may not exist",
+  "command.enchantmentbroker.remove.message": "Removed §e%s§r level §e%s§r from §e%s§r's stored enchantments",
+  "enchantmentbroker.broker.accepted": "Enchantment Broker has accepted your enchantments!",
+  "enchantmentbroker.broker.empty": "Enchantment Broker has no trades available!",
+  "enchantmentbroker.broker.hint": "Right-click the broker with your enchanted item to retrieve enchantments",
+  "enchantmentbroker.subtitle.broker.ambient": "Enchantment Broker mumbles",
+  "enchantmentbroker.subtitle.broker.death": "Enchantment Broker dies",
+  "enchantmentbroker.subtitle.broker.hurt": "Enchantment Broker hurts",
+  "enchantmentbroker.subtitle.broker.no": "Enchantment Broker disagrees",
+  "enchantmentbroker.subtitle.broker.trade": "Enchantment Broker trades",
+  "enchantmentbroker.subtitle.broker.yes": "Enchantment Broker agrees",
+  "entity.enchantmentbroker.broker": "The Refundler",
+  "item.enchantmentbroker.broker_spawn_egg": "Enchantment Broker Spawn Egg"
+}

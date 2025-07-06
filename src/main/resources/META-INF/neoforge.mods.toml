@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+issueTrackerURL="https://github.com/Mrbysco/EnchantmentBroker/issues"
+license="MIT"
+
+[[mods]]
+modId="enchantmentbroker"
+version="${file.jarVersion}"
+displayName="Enchantment Broker"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/enchantment-broker"
+authors="Mrbysco, ShyNieke"
+description='''
+Allowing players to strip enchantments from items and buy them from the Enchantment Broker.
+'''
+[[dependencies.enchantmentbroker]]
+modId="minecraft"
+type="required"
+versionRange="[1.21,1.22)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.enchantmentbroker]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.1,)"
+ordering="NONE"
+side="BOTH"
