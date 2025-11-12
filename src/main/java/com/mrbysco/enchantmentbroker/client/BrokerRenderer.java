@@ -8,27 +8,41 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.CrossedArmsItemLayer;
 import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
+import net.minecraft.client.renderer.entity.state.HoldingEntityRenderState;
+import net.minecraft.client.renderer.entity.state.VillagerRenderState;
 import net.minecraft.resources.ResourceLocation;
 
-public class BrokerRenderer extends MobRenderer<Broker, VillagerModel<Broker>> {
+public class BrokerRenderer extends MobRenderer<Broker, VillagerRenderState, VillagerModel> {
 	private static final ResourceLocation BROKER_TEXTURE = ResourceLocation.withDefaultNamespace("textures/entity/wandering_trader.png");
 
 	public BrokerRenderer(EntityRendererProvider.Context context) {
-		super(context, new VillagerModel<>(context.bakeLayer(ModelLayers.WANDERING_TRADER)), 0.5F);
-		this.addLayer(new CustomHeadLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
-		this.addLayer(new CrossedArmsItemLayer<>(this, context.getItemInHandRenderer()));
+		super(context, new VillagerModel(context.bakeLayer(ModelLayers.WANDERING_TRADER)), 0.5F);
+		this.addLayer(new CustomHeadLayer<>(this, context.getModelSet(), context.getPlayerSkinRenderCache()));
+		this.addLayer(new CrossedArmsItemLayer<>(this));
+	}
+
+	@Override
+	public VillagerRenderState createRenderState() {
+		return new VillagerRenderState();
+	}
+
+	@Override
+	public void extractRenderState(Broker broker, VillagerRenderState renderState, float partialTick) {
+		super.extractRenderState(broker, renderState, partialTick);
+		HoldingEntityRenderState.extractHoldingEntityRenderState(broker, renderState, this.itemModelResolver);
+		renderState.isUnhappy = broker.getUnhappyCounter() > 0;
 	}
 
 	/**
 	 * Returns the location of an entity's texture.
 	 */
 	@Override
-	public ResourceLocation getTextureLocation(Broker broke) {
+	public ResourceLocation getTextureLocation(VillagerRenderState broke) {
 		return BROKER_TEXTURE;
 	}
 
 	@Override
-	protected void scale(Broker broker, PoseStack poseStack, float partialTickTime) {
+	protected void scale(VillagerRenderState renderState, PoseStack poseStack) {
 		float f = 0.9375F;
 		poseStack.scale(f, f, f);
 	}

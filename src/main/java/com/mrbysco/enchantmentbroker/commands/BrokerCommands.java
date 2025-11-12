@@ -61,7 +61,7 @@ public class BrokerCommands {
 			set.addAll(brokerData.getUUIDs());
 		}
 		for (ServerPlayer serverPlayer : server.getPlayerList().getPlayers()) {
-			UUID uuid = serverPlayer.getGameProfile().getId();
+			UUID uuid = serverPlayer.getGameProfile().id();
 			set.add(uuid.toString());
 		}
 

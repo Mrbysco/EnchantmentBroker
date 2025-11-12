@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SpawnPlacementTypes;
@@ -19,10 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
@@ -36,7 +34,7 @@ public class EnchantmentBroker {
 	public static final String MOD_ID = "enchantmentbroker";
 	public static final Logger LOGGER = LogUtils.getLogger();
 
-	public EnchantmentBroker(IEventBus eventBus, Dist dist, ModContainer container) {
+	public EnchantmentBroker(IEventBus eventBus, Dist dist) {
 		ModRegistry.ITEMS.register(eventBus);
 		ModRegistry.ENTITIES.register(eventBus);
 		ModRegistry.SOUND_EVENTS.register(eventBus);
@@ -48,7 +46,6 @@ public class EnchantmentBroker {
 		NeoForge.EVENT_BUS.addListener(this::onLivingDamage);
 
 		if (dist.isClient()) {
-			container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 			eventBus.addListener(ClientHandler::registerEntityRenderers);
 		}
 	}
@@ -85,7 +82,7 @@ public class EnchantmentBroker {
 			LivingEntity livingEntity = event.getEntity();
 			if (livingEntity instanceof WanderingTrader wanderingTrader && wanderingTrader.getType() == EntityType.WANDERING_TRADER) {
 				Level level = livingEntity.level();
-				Broker broker = ModRegistry.BROKER.get().create(level);
+				Broker broker = ModRegistry.BROKER.get().create(level, EntitySpawnReason.CONVERSION);
 				if (broker != null) {
 					broker.setPos(wanderingTrader.getX(), wanderingTrader.getY(), wanderingTrader.getZ());
 					broker.setYRot(wanderingTrader.getYRot());

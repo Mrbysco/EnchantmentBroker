@@ -56,7 +56,7 @@ public class ModLanguageProvider extends LanguageProvider {
 	 * @param text  The subtitle text
 	 */
 	public void addSubtitle(SoundEvent sound, String text) {
-		String path = EnchantmentBroker.MOD_ID + ".subtitle." + sound.getLocation().getPath();
+		String path = EnchantmentBroker.MOD_ID + ".subtitle." + sound.location().getPath();
 		this.add(path, text);
 	}
 }

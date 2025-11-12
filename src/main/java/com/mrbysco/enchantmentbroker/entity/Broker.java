@@ -7,7 +7,6 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap.Entry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -47,6 +46,7 @@ import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -96,7 +96,7 @@ public class Broker extends AbstractVillager {
 				player.awardStat(Stats.TALKED_TO_VILLAGER);
 			}
 
-			if (!this.level().isClientSide) {
+			if (!this.level().isClientSide()) {
 				// Set the trading player to the current player
 				this.setTradingPlayer(player);
 
@@ -104,7 +104,7 @@ public class Broker extends AbstractVillager {
 				if (!enchantments.isEmpty()) {
 					BrokerData data = BrokerData.get(this.level());
 					for (Entry<Holder<Enchantment>> entry : enchantments.entrySet()) {
-						data.addEnchantment(player.getGameProfile().getId(), entry.getKey(), entry.getIntValue());
+						data.addEnchantment(player.getGameProfile().id(), entry.getKey(), entry.getIntValue());
 					}
 					data.setDirty();
 					itemstack.set(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
@@ -129,15 +129,15 @@ public class Broker extends AbstractVillager {
 				this.openTradingScreen(player, this.getDisplayName(), 1);
 			}
 
-			return InteractionResult.sidedSuccess(this.level().isClientSide);
+			return InteractionResult.SUCCESS;
 		} else {
 			return super.mobInteract(player, hand);
 		}
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
+	protected void readAdditionalSaveData(ValueInput input) {
+		super.readAdditionalSaveData(input);
 		this.offers = new MerchantOffers();
 	}
 
@@ -148,7 +148,7 @@ public class Broker extends AbstractVillager {
 
 	@Override
 	public MerchantOffers getOffers() {
-		if (this.level().isClientSide) {
+		if (this.level().isClientSide()) {
 			throw new IllegalStateException("Cannot load Broker offers on the client");
 		} else {
 			if (this.offers == null) {
@@ -167,7 +167,7 @@ public class Broker extends AbstractVillager {
 			this.offers.clear();
 		}
 
-		if (this.level().isClientSide) {
+		if (this.level().isClientSide()) {
 			throw new IllegalStateException("Cannot update Broker trades on the client");
 		}
 		if (this.getTradingPlayer() == null) {
@@ -175,7 +175,7 @@ public class Broker extends AbstractVillager {
 			return;
 		} else {
 			BrokerData data = BrokerData.get(this.level());
-			List<StoredEnchantment> storedEnchantments = new ArrayList<>(data.getEnchantments(this.getTradingPlayer().getGameProfile().getId()));
+			List<StoredEnchantment> storedEnchantments = new ArrayList<>(data.getEnchantments(this.getTradingPlayer().getGameProfile().id()));
 			if (storedEnchantments.isEmpty()) {
 				// If there are no enchantments, we cannot proceed with updating trades
 				return;
@@ -212,7 +212,7 @@ public class Broker extends AbstractVillager {
 			BrokerData data = BrokerData.get(this.level());
 			Optional<Entry<Holder<Enchantment>>> enchantmentHolder = enchantments.entrySet().stream().findFirst();
 			enchantmentHolder.ifPresent(entry ->
-					data.removeStoredEnchantment(serverPlayer.getGameProfile().getId(), entry.getKey(), entry.getIntValue())
+					data.removeStoredEnchantment(serverPlayer.getGameProfile().id(), entry.getKey(), entry.getIntValue())
 			);
 			data.setDirty();
 		}
