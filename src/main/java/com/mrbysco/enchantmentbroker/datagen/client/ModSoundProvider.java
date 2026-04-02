@@ -3,7 +3,7 @@ package com.mrbysco.enchantmentbroker.datagen.client;
 import com.mrbysco.enchantmentbroker.EnchantmentBroker;
 import com.mrbysco.enchantmentbroker.registry.ModRegistry;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
 public class ModSoundProvider extends SoundDefinitionsProvider {
@@ -61,15 +61,15 @@ public class ModSoundProvider extends SoundDefinitionsProvider {
 				));
 	}
 
-	public String modSubtitle(ResourceLocation id) {
+	public String modSubtitle(Identifier id) {
 		return EnchantmentBroker.MOD_ID + ".subtitle." + id.getPath();
 	}
 
-	public ResourceLocation modLoc(String name) {
+	public Identifier modLoc(String name) {
 		return EnchantmentBroker.modLoc(name);
 	}
 
-	public ResourceLocation mcLoc(String name) {
-		return ResourceLocation.fromNamespaceAndPath("minecraft", name);
+	public Identifier mcLoc(String name) {
+		return Identifier.fromNamespaceAndPath("minecraft", name);
 	}
 }

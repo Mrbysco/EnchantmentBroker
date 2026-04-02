@@ -29,7 +29,7 @@ import java.util.UUID;
 public class BrokerCommands {
 	public static void initializeCommands(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext context) {
 		final LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal(EnchantmentBroker.MOD_ID);
-		root.requires((commandSource) -> commandSource.hasPermission(2))
+		root.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
 				.then(Commands.literal("storedEnchants")
 						.then(Commands.argument("uuid", UuidArgument.uuid())
 								.suggests(

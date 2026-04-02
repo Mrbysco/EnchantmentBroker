@@ -2,18 +2,18 @@ package com.mrbysco.enchantmentbroker.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mrbysco.enchantmentbroker.entity.Broker;
-import net.minecraft.client.model.VillagerModel;
 import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.model.npc.VillagerModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.CrossedArmsItemLayer;
 import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
 import net.minecraft.client.renderer.entity.state.HoldingEntityRenderState;
 import net.minecraft.client.renderer.entity.state.VillagerRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class BrokerRenderer extends MobRenderer<Broker, VillagerRenderState, VillagerModel> {
-	private static final ResourceLocation BROKER_TEXTURE = ResourceLocation.withDefaultNamespace("textures/entity/wandering_trader.png");
+	private static final Identifier BROKER_TEXTURE = Identifier.withDefaultNamespace("textures/entity/wandering_trader.png");
 
 	public BrokerRenderer(EntityRendererProvider.Context context) {
 		super(context, new VillagerModel(context.bakeLayer(ModelLayers.WANDERING_TRADER)), 0.5F);
@@ -37,7 +37,7 @@ public class BrokerRenderer extends MobRenderer<Broker, VillagerRenderState, Vil
 	 * Returns the location of an entity's texture.
 	 */
 	@Override
-	public ResourceLocation getTextureLocation(VillagerRenderState broke) {
+	public Identifier getTextureLocation(VillagerRenderState broke) {
 		return BROKER_TEXTURE;
 	}
 

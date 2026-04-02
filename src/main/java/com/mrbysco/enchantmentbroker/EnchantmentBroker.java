@@ -5,7 +5,7 @@ import com.mrbysco.enchantmentbroker.client.ClientHandler;
 import com.mrbysco.enchantmentbroker.commands.BrokerCommands;
 import com.mrbysco.enchantmentbroker.entity.Broker;
 import com.mrbysco.enchantmentbroker.registry.ModRegistry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -14,7 +14,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.item.FallingBlockEntity;
-import net.minecraft.world.entity.npc.WanderingTrader;
+import net.minecraft.world.entity.npc.wanderingtrader.WanderingTrader;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -50,8 +50,8 @@ public class EnchantmentBroker {
 		}
 	}
 
-	public static ResourceLocation modLoc(String name) {
-		return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
+	public static Identifier modLoc(String name) {
+		return Identifier.fromNamespaceAndPath(MOD_ID, name);
 	}
 
 	private void addTabContents(final BuildCreativeModeTabContentsEvent event) {

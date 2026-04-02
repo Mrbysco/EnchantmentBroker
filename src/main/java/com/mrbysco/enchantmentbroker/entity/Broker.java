@@ -29,14 +29,14 @@ import net.minecraft.world.entity.ai.goal.MoveTowardsRestrictionGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.TradeWithPlayerGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.monster.Evoker;
-import net.minecraft.world.entity.monster.Illusioner;
-import net.minecraft.world.entity.monster.Pillager;
 import net.minecraft.world.entity.monster.Vex;
-import net.minecraft.world.entity.monster.Vindicator;
 import net.minecraft.world.entity.monster.Zoglin;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.monster.illager.Evoker;
+import net.minecraft.world.entity.monster.illager.Illusioner;
+import net.minecraft.world.entity.monster.illager.Pillager;
+import net.minecraft.world.entity.monster.illager.Vindicator;
+import net.minecraft.world.entity.monster.zombie.Zombie;
+import net.minecraft.world.entity.npc.villager.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -96,13 +96,13 @@ public class Broker extends AbstractVillager {
 				player.awardStat(Stats.TALKED_TO_VILLAGER);
 			}
 
-			if (!this.level().isClientSide()) {
+			if (this.level() instanceof ServerLevel serverLevel) {
 				// Set the trading player to the current player
 				this.setTradingPlayer(player);
 
 				ItemEnchantments enchantments = itemstack.getTagEnchantments();
 				if (!enchantments.isEmpty()) {
-					BrokerData data = BrokerData.get(this.level());
+					BrokerData data = BrokerData.get(serverLevel);
 					for (Entry<Holder<Enchantment>> entry : enchantments.entrySet()) {
 						data.addEnchantment(player.getGameProfile().id(), entry.getKey(), entry.getIntValue());
 					}
@@ -110,7 +110,7 @@ public class Broker extends AbstractVillager {
 					itemstack.set(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
 					itemstack.set(DataComponents.REPAIR_COST, 0);
 
-					this.updateTrades();
+					this.updateTrades(serverLevel);
 					this.setTradingPlayer(null);
 					player.displayClientMessage(Component.translatable("enchantmentbroker.broker.accepted").withStyle(ChatFormatting.GREEN), true);
 					playSound(SoundEvents.GRINDSTONE_USE, 1.0F, getRandom().nextFloat() * 0.1F + 0.9F);
@@ -118,7 +118,7 @@ public class Broker extends AbstractVillager {
 					return InteractionResult.CONSUME;
 				}
 
-				this.updateTrades();
+				this.updateTrades(serverLevel);
 				if (this.getOffers().isEmpty()) {
 					player.displayClientMessage(Component.translatable("enchantmentbroker.broker.empty").withStyle(ChatFormatting.RED), true);
 					playSound(ModRegistry.BROKER_NO.get(), 1.0F, getRandom().nextFloat() * 0.1F + 0.9F);
@@ -160,7 +160,7 @@ public class Broker extends AbstractVillager {
 	}
 
 	@Override
-	protected void updateTrades() {
+	protected void updateTrades(ServerLevel serverLevel) {
 		if (this.offers == null) {
 			this.offers = new MerchantOffers();
 		} else {
