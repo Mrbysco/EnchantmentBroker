@@ -112,7 +112,7 @@ public class Broker extends AbstractVillager {
 
 					this.updateTrades(serverLevel);
 					this.setTradingPlayer(null);
-					player.displayClientMessage(Component.translatable("enchantmentbroker.broker.accepted").withStyle(ChatFormatting.GREEN), true);
+					player.sendOverlayMessage(Component.translatable("enchantmentbroker.broker.accepted").withStyle(ChatFormatting.GREEN));
 					playSound(SoundEvents.GRINDSTONE_USE, 1.0F, getRandom().nextFloat() * 0.1F + 0.9F);
 
 					return InteractionResult.CONSUME;
@@ -120,7 +120,7 @@ public class Broker extends AbstractVillager {
 
 				this.updateTrades(serverLevel);
 				if (this.getOffers().isEmpty()) {
-					player.displayClientMessage(Component.translatable("enchantmentbroker.broker.empty").withStyle(ChatFormatting.RED), true);
+					player.sendOverlayMessage(Component.translatable("enchantmentbroker.broker.empty").withStyle(ChatFormatting.RED));
 					playSound(ModRegistry.BROKER_NO.get(), 1.0F, getRandom().nextFloat() * 0.1F + 0.9F);
 					this.setTradingPlayer(null);
 					return InteractionResult.CONSUME;

@@ -6,12 +6,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.mrbysco.enchantmentbroker.EnchantmentBroker;
 import net.minecraft.core.Holder;
 import net.minecraft.core.UUIDUtil;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
-import net.minecraft.world.level.storage.DimensionDataStorage;
+import net.minecraft.world.level.storage.SavedDataStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class BrokerData extends SavedData {
-	private static final String DATA_NAME = EnchantmentBroker.MOD_ID + "_data";
+	private static final Identifier DATA_NAME = EnchantmentBroker.modLoc("broker_data");
 
 
 	public static final Codec<BrokerData> CODEC = RecordCodecBuilder.create(inst -> inst.group(
@@ -83,7 +84,7 @@ public class BrokerData extends SavedData {
 		ServerLevel overworld = level.getServer().getLevel(Level.OVERWORLD);
 
 		assert overworld != null;
-		DimensionDataStorage storage = overworld.getDataStorage();
+		SavedDataStorage storage = overworld.getDataStorage();
 		return storage.computeIfAbsent(type());
 	}
 }
