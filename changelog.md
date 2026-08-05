@@ -1,1 +1,1 @@
-* Update to 26.1.1
+* Compile against more recent NeoForge
